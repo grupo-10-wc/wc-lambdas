@@ -11,7 +11,7 @@ dynamo = boto3.resource("dynamodb").Table(os.environ["TABLE_NAME"])
 def lambda_handler(event, context):
     # Ex.: {"deviceId":"sensor-001","temp":24.2,"hum":60}
     try:
-        msg = event if isinstance(event, dict) else json.loads(json.dumps(item), parse_float=Decimal)
+        msg = event if isinstance(event, dict) else json.loads(json.dumps(event), parse_float=Decimal)
         item = {
             "deviceId": str(msg.get("deviceId", "unknown")),
             "ts": int(time.time()*1000),
